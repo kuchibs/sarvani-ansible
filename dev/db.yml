@@ -1,0 +1,9 @@
+---
+- hosts: db
+  tasks:
+   - name: install db package
+     yum: 
+        name: mysql
+        state: present
+   - name: start service and enable it
+     service: enabled=true name=mariadb.service state=started
