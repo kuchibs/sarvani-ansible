@@ -3,12 +3,12 @@
   tasks:
       - name: package epel-release upgrade
         yum: name=epel-release
-      - name: Enable https service
+      - name: Firewall service https enable
         firewalld: service={{item}} permanent=true state=enabled
         with_items:
         - http
         - https
-      - name: Enable https service ports
+      - name: Firewall open ports
         firewalld: port={{item}} permanent=true state=enabled
         with_items:
         - 8080/tcp

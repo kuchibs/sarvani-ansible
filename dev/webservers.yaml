@@ -16,3 +16,6 @@
       - mod_wsgi
       - python-pip
       - python-virtualenv 
+   - name: Enable and start service
+      service: enabled=true name=ihttpd state=started
+
