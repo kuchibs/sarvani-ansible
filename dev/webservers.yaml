@@ -1,0 +1,18 @@
+---
+- hosts: webserver
+  #become: true
+  tasks:
+   - name: install web components
+     yum: name={{item}} state=present
+     with_items:
+      - epel-release 
+   - name: install web components
+     yum: name={{item}} state=present
+     with_items:
+      - tcpdump
+      - ntp
+      - epel-release
+      - httpd
+      - mod_wsgi
+      - python-pip
+      - python-virtualenv 
