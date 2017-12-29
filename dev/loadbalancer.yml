@@ -4,13 +4,15 @@
       - name: package epel-release upgrade
         yum: name=epel-release
       - name: Enable https service
-        firewalld: service=https permanent=true state=enabled
-      - name: Enable port8080
-        firewalld: port=8080/tcp permanent=true state=enabled
-      - name: Enable port8443
-        firewalld: port=8443/tcp permanent=true state=enabled
-      - name: Enable http service
-        firewalld: service=http permanent=true state=enabled
+        firewalld: service={{item}} permanent=true state=enabled
+        with_items:
+        - http
+        - https
+      - name: Enable https service ports
+        firewalld: port={{item}} permanent=true state=enabled
+        with_items:
+        - 8080/tcp
+        - 8443/tcp
       - name: nginx start
         yum: name=nginx state=present
       - name: Enable and start nginx
