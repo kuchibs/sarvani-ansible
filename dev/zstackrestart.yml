@@ -1,0 +1,24 @@
+---
+#stop from db then webserver, then lb
+- hosts: db
+  tasks:
+   - service: name=mariadb state=stopped
+- hosts: webserver
+  tasks:
+   - service: name=httpd state=stopped
+- hosts: loadbalancer
+  tasks:
+   - service: name=nginx state=stopped
+
+#start again lb, ws, db
+- hosts: loadbalancer
+  tasks:
+   - service: name=nginx state=started
+- hosts: webserver
+  tasks:
+   - service: name=httpd state=started
+- hosts: db
+  tasks:
+   - service: name=mariadb state=stopped
+
+
